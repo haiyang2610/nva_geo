@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8">
+		
+		// Espere a que PhoneGap se inicie
+		
+		
+	document.addEventListener("deviceready",onDeviceReady, false);
+    
+   var watchID = null;
+
+    // PhoneGap esta lista
+    //
+    function onDeviceReady() {
+        // Actualizar cada 3 segundos
+        var options = { frequency: 3000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
+
+    // Función onSuccess
+    //
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                            'Longitude: ' + position.coords.longitude     + '<br />' +
+                            '<hr />'      + element.innerHTML;
+    }
+
+    // Función onError
+    //
+    function onError(error) {
+        alert('código: '    + error.code    + '\n' +
+              'mensaje: ' + error.message + '\n');
+    }
+
+
+</script>
+</head>
+
+<body >
+	<p id="geolocation">Observando geolocalización..</p>	
+</body>
+</html>
